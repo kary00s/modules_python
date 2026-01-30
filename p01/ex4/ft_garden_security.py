@@ -1,4 +1,4 @@
-class plant:
+class SecurePlant:
     def __init__(self, name, height, age):
         self.name = name
         self.__height = height
@@ -6,20 +6,21 @@ class plant:
 
     def display(self):
         print(f"plant created : {self.name}")
-        print(f"hight updated : {self.__height}")
-        print(f"age updated : {self.__age}")
 
     def set_age(self, age):
         if age > 0:
             self.__age = age
+            print(f"age updated: age {self.__height}cm [OK]")
         else:
             print(f"Invalid operation attempted: age {self.__age}cm [REJECTED]")
 
     def set_height(self, height):
         if height > 0:
             self.__height = height
+            print(f"Height updated: height {self.__height}cm [OK]")
         else:
-            print(f"Invalid operation attempted: age {self.__height}cm [REJECTED])
+            print("Invalid operation attempted:"
+                  f" height {self.__height}cm [REJECTED]")
 
     def get_age(self):
         return self.__age
@@ -28,8 +29,16 @@ class plant:
         return self.__height
 
 
-p1 = plant("rose", -10, -20)
-p1.set_age(p1.get_age())
-p1.set_height(p1.get_height())
-print(p1.get_age())
-p1.display()
+plants = {}
+plants["Rose"] = SecurePlant("Rose", 25, -30)
+plants["Oak"] = SecurePlant("Oak", -200, 365)
+plants["Cactus"] = SecurePlant("Cactus", -5, 90)
+plants["jasmine"] = SecurePlant("jasmine", -50, 65)
+
+if __name__ == "__main__":
+    print("=== Garden Security System ===\n")
+    for p in plants.values():
+        p.display()
+        p.set_age(p.get_age())
+        p.set_height(p.get_height())
+        print("\n")
