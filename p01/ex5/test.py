@@ -36,5 +36,16 @@ class Vegetable(Plant):
         print(f"{self.name} (Vergetebale) : {self.height} cm, {self.age} days,"
               f"{self.harvest_season} cm diameter")
         print(f"Tomato is rich in vitamin {self.nutritional_value}")
+
+
 def display():
-    
+    rose = flower("jasmine", 30, 20, "red")
+    rose.bloom()
+
+    oak= tree("oak", 30, 20,12 , "square")
+    rose.bloom()
+
+    tomato = Vegetable("tomato", 30, "summer", "a")
+    tomato.harvest()
+
+display()
