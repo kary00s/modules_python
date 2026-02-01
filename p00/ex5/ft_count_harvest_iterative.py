@@ -5,5 +5,3 @@ def harvest_iter():
         i += 1
         print(f"day {i}")
     print("harvest time .")
-
-harvest_iter()

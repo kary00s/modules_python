@@ -26,4 +26,4 @@ def garden_grew(days):
 
 if __name__ == "__main__":
     plant = plant("werda", 25, 30)
-    garden_grew(9)
+    garden_grew(22)

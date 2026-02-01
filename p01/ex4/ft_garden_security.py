@@ -34,8 +34,7 @@ class SecurePlant:
     def get_height(self):
         return self.__height
 
-plant{}
-[]
+
 if __name__ == "__main__":
     p = SecurePlant("jasmine", -10, 1)
     print("=== Garden Security System ===\n")
