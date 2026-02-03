@@ -3,7 +3,6 @@ class Plant:
         self.name = name
         self.height = height
     ############ TYPE OF PLANT ##########
-
 class tree(Plant):
     def __init__(self, name, height):
         Plant.__init__(self, name, height)
