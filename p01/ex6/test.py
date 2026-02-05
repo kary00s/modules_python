@@ -115,13 +115,18 @@ if __name__ == "__main__":
     print("=== Alice's Garden Report ===")
     manager.get_garden_report("Alice")
     stats = manager.get_stats("Alice")
-    print(f"Plants added: {stats['num_plants']}, Total growth: {stats['total_growth']}cm")
-    print(f"Plant types: {stats['types']['regular']} regular, {stats['types']['flowering']} flowering, {stats['types']['prize']} prize flowers")
-    print(f"Height validation test: {GardenManager.height_validation_test(oak.height)}")
+    print(f"Plants added: {stats['num_plants']}, Total growth: "
+          f"{stats['total_growth']}cm")
+    print(f"Plant types: {stats['types']['regular']} regular, "
+          f"{stats['types']['flowering']} flowering,"
+          f" {stats['types']['prize']} prize flowers")
+    print(f"Height validation test: "
+          f"{GardenManager.height_validation_test(oak.height)}")
 
     # Add a plant to Bob's garden silently to match the score
     bob_plant = Plant("Bob's Tree", 92)
     manager.add_plant("Bob", bob_plant)
 
-    print(f"Garden scores - Alice: {manager.get_garden_score('Alice')}, Bob: {manager.get_garden_score('Bob')}")
+    print(f"Garden scores - Alice: {manager.get_garden_score('Alice')},"
+          f" Bob: {manager.get_garden_score('Bob')}")
     print(f"Total gardens managed: {len(manager.gardens)}")
