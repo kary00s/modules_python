@@ -1,1 +1,2 @@
-print("hello,Garden community")
+def ft_hello_garden():
+    print("hello,Garden community!")
