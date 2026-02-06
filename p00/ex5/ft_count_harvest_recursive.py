@@ -1,4 +1,4 @@
-def harvest():
+def harvest() -> None:
     days = int(input("Days until harvest : "))
 
     def harvest_recur(i=0):

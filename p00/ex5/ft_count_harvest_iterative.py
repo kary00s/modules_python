@@ -1,4 +1,4 @@
-def harvest_iter():
+def harvest_iter() -> None:
     days = int(input("Days until harvest : "))
     i = 0
     while i < days:
