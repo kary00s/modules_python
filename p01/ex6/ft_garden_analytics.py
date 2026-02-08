@@ -105,13 +105,11 @@ class GardenManager():
                     return sum_heights + 40
             return sum_heights
 
-if __name__ == "__main__":
+def main():
     print("=== Garden Management System Demo ===")
     manager = GardenManager()
     name = manager.add_garden("Alice")
-
     manager.add_garden("Bob")
-    manager.add_garden("karim")
     list = {
     'oak' : Plant("Oak Tree", 50),
     'Rose' : FloweringPlant("Rose", 23, "red"),
@@ -135,3 +133,6 @@ if __name__ == "__main__":
     manager.add_plant("Bob", bob_plant) 
     print(f"Garden scores - Alice: {manager.get_garden_score('Alice')}, Bob: {manager.get_garden_score('Bob')}")
     print(f"Total gardens managed: {len(manager.gardens)}")
+
+if __name__ == "__main__":
+    main()
