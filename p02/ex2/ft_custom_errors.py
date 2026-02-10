@@ -3,31 +3,23 @@ class GardenError(Exception):
 
 class PlantError(GardenError):
     pass
+# class WaterError(GardenError):
+    # pass
 
-class WaterError(GardenError):
-    pass
-class Plant:
-    def __init__(self, name, last_days_watering):
-        self.name = name
-        self.last_days_watering = last_days_watering
-
-
-def check_tank(size):
-    if size < 5:
-        print("Caught WaterError: Not enough water in the tank!")
-
-def check_plant(self, last_day_watering):
-    if last_day_watering > 2:
-        
-
+def check_watering(watering):
+    try:
+        if watering < 2:
+            raise PlantError
+    except PlantError:
+        print("Error")
 def garden_operations(type):
 
     if type == "PlantError":
         try:
-            
-            print("----------------------------------")
+            if watering < 2:
+                raise PlantError
         except PlantError:
-            print("Caught PlantError: The tomato plant is wilting!")
+            print("caught PlantError : The tomato plant is wilting!")
     # elif type == "WaterError":
     # elif type == "garden_errors":
 def test_error_types():
