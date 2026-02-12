@@ -5,8 +5,12 @@ class WaterError(Exception):
 class PlantError(Exception):
     pass
 
+class GardenError(Exception):
+    pass
+
 class GardenManager:
     list = []
+    tank_size = 2
     def __init__(self, name, water_level, sunlight_hours):
         self.name = name
         self.water_level = water_level
@@ -37,17 +41,18 @@ class GardenManager:
         else:
             print(f"Added {self.name} successfully")
 
-    def watering(self):
-        if self.water_level > 5:
-            print(f"Watering {self.name} - success")
-            self.water_level -= 5
+    def check_tank_level():
+        if GardenManager.tank_size > 5:
+            pass
         else:
-            raise WaterError("Not enough water in tank")
+            raise GardenError("Not enough water in tank")
 
     def watering_plants():
         try:
             for plant in GardenManager.list:
-                GardenManager.watering(plant)
+                GardenManager.Check_water_level(plant)
+                print(f"Watering {plant.name} - success")
+                GardenManager.tank_size -= 5
         except WaterError as error:
             print(f"Error : {error}")
         finally:
@@ -59,7 +64,7 @@ class GardenManager:
                 GardenManager.Check_water_level(plant)
                 GardenManager.Check_sunlight(plant)
             except PlantError as error:
-                print(f"Error : {error}")
+                print(f"Error cheaking {plant.name} : {error}")
             else:
                 print(f"{plant.name} : healthy (water : {plant.water_level}, sun : {plant.sunlight_hours})")
 
@@ -78,7 +83,15 @@ def test_garden_management(plant_list):
     print("\nChecking plant health...")
     GardenManager.Check_plant_health()
 
-test_garden_management( [
+    print("\nTesting error recovery...")
+    try:       
+        GardenManager.check_tank_level()
+    except GardenError as error:
+        print(f"Caught GardenError: {error}")
+        print("System recovered and continuing...")
+    finally:
+        print("\nGarden management system test complete!")
+test_garden_management([
                         GardenManager("tomato", 5, 8),
-                        GardenManager("lettuce", 8, 15),
+                        GardenManager("lettuce",5, 15),
                         GardenManager("", 4, 7)])
