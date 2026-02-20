@@ -1,12 +1,11 @@
 class plant:
-    def __init__(self, name, height, age):
+    def __init__(self, name : str, height : int, age : int):
         self.name = name
         self.height = height
         self.age = age
 
 
 if __name__ == "__main__":
-
     sunflower = plant("Sunflower", 30, 20)
     rose = plant("Rose", 80, 45)
     cactus = plant("Cactus", 15, 120)
