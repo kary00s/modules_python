@@ -1,5 +1,6 @@
 import sys
 
+
 def ft_score_analytics():
     args = sys.argv
     i = 1
@@ -12,15 +13,19 @@ def ft_score_analytics():
 
     except ValueError:
         print("OOPS , you put an invalid argument")
-    else:
 
+    print("=== Player Score Analytics ===")
+    if len(lst) > 0:
         print(f"Scores processed: {len(args) - 1}")
         print(f"Total score : {sum(lst)}")
         print(f"Average score : {sum(lst) / (len(args) - 1)}")
-        print(lst)
         print(f"High score: {max(lst)}")
         print(f"Low score: {min(lst)}")
-        print(f"Score range: {max(lst) - min(lst)}")
+        print(f"Score range: {max(lst) - min(lst)}\n")
+    else:
+        print("No scores provided. Usage: python3 ft_score_analytics.py"
+              " :wq!<score1> <score2> ...")
 
 
-ft_score_analytics()
+if __name__ == "__main__":
+    ft_score_analytics()
