@@ -1,15 +1,15 @@
 class Plant:
-    def __init__(self, name, age, height):
+    def __init__(self, name: str, age: int, height: int):
         self.name = name
         self.age = age
         self.height = height
 
 
 class tree(Plant):
-    def __init__(self, name, age, height, diameter):
+    def __init__(self: str, name: str, age: int, height: int, diameter: int):
         Plant.__init__(self, name, age, height)
         self.diameter = diameter
-    
+
     def produce_shade(self):
         print(f"{self.name} (Tree) : {self.height} cm, {self.age} days,"
               f" {self.diameter} cm diameter")
@@ -18,22 +18,23 @@ class tree(Plant):
 
 
 class flower(Plant):
-    def __init__(self, name, age, height, color):
+    def __init__(self, name: str, age: int, height: int, color: str):
         Plant.__init__(self, name, age, height)
         self.color = color
-    
+
     def bloom(self):
         print(f"{self.name} (Flower) : {self.height} cm, {self.age} days,"
-              f" {self.color} cm diameter")
+              f" {self.color} color")
         print("Rose is blooming beautifully!\n")
 
 
 class Vegetable(Plant):
-    def __init__(self, name, age, height, harvest_season,  nutritional_value):
+    def __init__(self, name: str, age: int, height: int,
+                 harvest_season: str, nutritional_value: str):
         Plant.__init__(self, name, age, height)
         self.harvest_season = harvest_season
         self.nutritional_value = nutritional_value
-    
+
     def harvest(self):
         print(f"{self.name} (Vergetebale) : {self.height} cm,{self.age} days,"
               f" {self.harvest_season} harvest")
@@ -42,14 +43,15 @@ class Vegetable(Plant):
 
 def display():
     print("=== Garden Security System ===\n")
-    rose = flower("rose", 25, 30, "red")
+    rose = flower("rose", 30, 25, "red")
     rose.bloom()
 
-    oak = tree("Oak", 500, 1825, 50)
+    oak = tree("Oak", 1825, 500, 50)
     oak.produce_shade()
 
-    tomato = Vegetable("tomato", 80, 10, "summer", "a")
+    tomato = Vegetable("tomato", 10, 80, "summer", "C")
     tomato.harvest()
 
 
-display()
+if __name__ == "__main__":
+    display()

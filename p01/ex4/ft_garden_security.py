@@ -1,5 +1,5 @@
 class SecurePlant:
-    def __init__(self, name, age, height):
+    def __init__(self, name: str, age: int, height: int):
         self.name = name
         self.__height = height
         self.__age = age
@@ -27,7 +27,7 @@ class SecurePlant:
             print("Invalid operation attempted:"
                   f" height {self.__height}cm [REJECTED]")
             print("Security: Negative height rejected\n")
-            
+
     def get_age(self):
         return self.__age
 
