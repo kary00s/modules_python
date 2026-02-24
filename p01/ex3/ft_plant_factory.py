@@ -7,19 +7,21 @@ class Plant:
         self.age = age
         Plant.count += 1
 
-    def __str__(self):
+    def creator(self):
         return f"created : {self.name} ({self.height} cm, {self.age} days)"
 
+def main():
+    plants = [
+            Plant("Rose", 25, 30),
+            Plant("Oak", 200, 365),
+            Plant("Cactus", 5, 90),
+            Plant("Sunflower", 80, 45),
+            Plant("Fern", 15, 120)
+            ]
+    for plant in plants:
+        print(plant.creator())
+    print(f"\nTotal plants created: {Plant.count}")
 
-plants = {}
 
-plants["Rose"] = Plant("Rose", 25, 30)
-plants["Oak"] = Plant("Oak", 200, 365)
-plants["Cactus"] = Plant("Cactus", 5, 90)
-plants["jasmine"] = Plant("jasmine", 50, 65)
-plants["loren"] = Plant("loren", 5, 90)
-
-for p in plants.values():
-    print(p)
-
-print(f"\nTotal plants created: {Plant.count}")
+if __name__ == "__main__":
+    main()

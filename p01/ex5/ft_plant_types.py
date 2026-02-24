@@ -7,7 +7,7 @@ class Plant:
 
 class tree(Plant):
     def __init__(self: str, name: str, age: int, height: int, diameter: int):
-        Plant.__init__(self, name, age, height)
+        super().__init__(name, age, height)
         self.diameter = diameter
 
     def produce_shade(self):
@@ -19,7 +19,7 @@ class tree(Plant):
 
 class flower(Plant):
     def __init__(self, name: str, age: int, height: int, color: str):
-        Plant.__init__(self, name, age, height)
+        super().__init__(name, age, height)
         self.color = color
 
     def bloom(self):
@@ -31,7 +31,7 @@ class flower(Plant):
 class Vegetable(Plant):
     def __init__(self, name: str, age: int, height: int,
                  harvest_season: str, nutritional_value: str):
-        Plant.__init__(self, name, age, height)
+        super().__init__(name, age, height)
         self.harvest_season = harvest_season
         self.nutritional_value = nutritional_value
 
@@ -41,17 +41,17 @@ class Vegetable(Plant):
         print(f"Tomato is rich in vitamin {self.nutritional_value}\n")
 
 
-def display():
+def main():
     print("=== Garden Security System ===\n")
-    rose = flower("rose", 30, 25, "red")
+    rose = flower("Rose", 30, 25, "red")
     rose.bloom()
 
     oak = tree("Oak", 1825, 500, 50)
     oak.produce_shade()
 
-    tomato = Vegetable("tomato", 10, 80, "summer", "C")
+    tomato = Vegetable("Tomato", 10, 80, "summer", "C")
     tomato.harvest()
 
 
 if __name__ == "__main__":
-    display()
+    main()

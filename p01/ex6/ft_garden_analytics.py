@@ -45,7 +45,7 @@ class GardenManager():
     gardens = {}
 
     class GardenStats:
-        def get_statistics(plants):
+        def get_statistics(plants: list):
             types = {'regular': 0, 'flowering': 0, 'prize': 0}
             for p in plants:
                 if p.__class__ == PrizeFlower:
@@ -81,7 +81,7 @@ class GardenManager():
         if g_name in self.gardens:
             self.gardens[g_name].append(plant)
 
-    def help_grow(self, g_name):
+    def help_grow(self, g_name: str):
         if g_name in self.gardens:
             for plant in self.gardens[g_name]:
                 Plant.grow(plant)
@@ -124,7 +124,7 @@ class GardenManager():
 
 
 def main():
-    print("=== Garden Management System Demo ===")
+    print("=== Garden Management System Demo ===\n")
     manager = GardenManager()
     name = manager.add_garden("Alice")
     manager.add_garden("Bob")
@@ -138,10 +138,10 @@ def main():
     manager.add_plant("Alice", list['Sunflower'])
     print(f"Added Sunflower to {name}'s garden")
 
-    print(f"{name} is helping all plants grow...")
+    print(f"\n{name} is helping all plants grow...")
     manager.help_grow("Alice")
 
-    print(f"\n=== {name}'s Garden Report ===")
+    print(f"\n=== {name}'s Garden Report ===\n")
     manager.get_garden_report("Alice")
     manager.get_infos("Alice")
 

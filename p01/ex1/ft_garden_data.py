@@ -6,8 +6,8 @@ class plant:
 
 
 if __name__ == "__main__":
-    sunflower = plant("Sunflower", 30, 20)
-    rose = plant("Rose", 80, 45)
+    sunflower = plant("rose", 25, 30)
+    rose = plant("Sunflower", 80, 45)
     cactus = plant("Cactus", 15, 120)
 
     print("=== Garden Plant Registry ===")

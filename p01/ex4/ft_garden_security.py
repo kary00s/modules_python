@@ -5,28 +5,30 @@ class SecurePlant:
         self.__age = age
 
     def display(self):
-        print(f"plant created : {self.name}")
-        self.set_age()
-        self.set_height()
-        print(f"Current plant: Rose ({self.__age}cm, 30 days)")
+        if self.set_height() is True:
+            print(f"plant created : {self.name}")
+            height = self.get_height()
+            print(f"Height updated: height {height}cm [OK]")
+            self.set_age()
 
     def set_age(self):
         if self.get_age() >= 0:
-            self.__age = self.get_age()
-            print(f"age updated: age {self.__age}cm [OK]\n")
+            age = self.get_age()
+            print(f"age updated: age {age}cm [OK]")
         else:
             print("Invalid operation attempted:"
-                  f"age {self.__age}cm [REJECTED]")
-            print("Security: Negative age rejected\n")
+                  f"age {age}cm [REJECTED]")
+            print("Security: Negative age rejected")
 
     def set_height(self):
+        height = self.get_height()
         if self.get_height() >= 0:
-            self.__height = self.get_height()
-            print(f"Height updated: height {self.__height}cm [OK]\n")
+            return True
         else:
-            print("Invalid operation attempted:"
-                  f" height {self.__height}cm [REJECTED]")
+            print("\nInvalid operation attempted:"
+                  f" height {height}cm [REJECTED]")
             print("Security: Negative height rejected\n")
+            return False
 
     def get_age(self):
         return self.__age
@@ -34,9 +36,15 @@ class SecurePlant:
     def get_height(self):
         return self.__height
 
+def main():
+
+    plant1 = SecurePlant("rose", 30, 25)
+    plant2 = SecurePlant("Sunflower", -5, -5)
+    print("=== Garden Security System ===\n")
+    plant1.display()
+    plant2.display()
+    print(f"\nCurrent plant: Rose({plant1.get_height()}cm, {plant1.get_age()} days)")
+
 
 if __name__ == "__main__":
-    p = SecurePlant("jasmine", -10, 1)
-    print("=== Garden Security System ===\n")
-    p.display()
-    print("\n")
+    main()
