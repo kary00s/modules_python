@@ -36,14 +36,15 @@ class SecurePlant:
     def get_height(self):
         return self.__height
 
-def main():
 
+def main():
     plant1 = SecurePlant("rose", 30, 25)
     plant2 = SecurePlant("Sunflower", -5, -5)
     print("=== Garden Security System ===\n")
     plant1.display()
     plant2.display()
-    print(f"\nCurrent plant: Rose({plant1.get_height()}cm, {plant1.get_age()} days)")
+    print("\nCurrent plant: Rose"
+          f"({plant1.get_height()}cm, {plant1.get_age()} days)")
 
 
 if __name__ == "__main__":
