@@ -40,7 +40,6 @@ def ft_coordinate_system(cordinate: str):
     cordinate_list = Parsing(cordinate)
     
 
-
 def test_cordinates():
     ## test without parsing   (10, 20, 5)
 
