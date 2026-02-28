@@ -1,23 +1,25 @@
 class Plant_error(Exception):
     pass
 
-def check_tank_size(tank_size):
+
+def check_tank_size(tank_size: int) -> None:
     if tank_size < 5:
         raise Plant_error("Error")
 
 
-def normal_watering(plant):
+def normal_watering(plant: str) -> str:
     print(f"watering : {plant}")
 
-def check_plant(plant):
-    if isinstance(plant, str):
-        return (plant)
+
+def check_plant(plant: str) -> str:
+    if plant.__class__ == str:
+        return plant
     else:
         raise Plant_error("Error")
 
 
-def water_plants(plant_list):
-    tank_size = 10
+def water_plants(plant_list: list) -> None:
+    tank_size = 7
     try:
         for plant in plant_list:
             check_plant(plant)
@@ -32,7 +34,7 @@ def water_plants(plant_list):
         print("Closing watering system (cleanup)")
 
 
-def main():
+def main() -> None:
     plant_list = ["tomato", "lettuce", "carrots"]
     print("=== Garden Watering System ===\n")
     print("Testing normal watering...")

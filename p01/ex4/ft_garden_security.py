@@ -16,8 +16,7 @@ class SecurePlant:
             age = self.get_age()
             print(f"age updated: age {age}cm [OK]")
         else:
-            print("Invalid operation attempted:"
-                  f"age {age}cm [REJECTED]")
+            print("Invalid operation attempted:" f"age {age}cm [REJECTED]")
             print("Security: Negative age rejected")
 
     def set_height(self):
@@ -25,8 +24,7 @@ class SecurePlant:
         if self.get_height() >= 0:
             return True
         else:
-            print("\nInvalid operation attempted:"
-                  f" height {height}cm [REJECTED]")
+            print("\nInvalid operation attempted:" f" height {height}cm [REJECTED]")
             print("Security: Negative height rejected\n")
             return False
 
@@ -43,8 +41,7 @@ def main():
     print("=== Garden Security System ===\n")
     plant1.display()
     plant2.display()
-    print("\nCurrent plant: Rose"
-          f"({plant1.get_height()}cm, {plant1.get_age()} days)")
+    print("\nCurrent plant: Rose" f"({plant1.get_height()}cm, {plant1.get_age()} days)")
 
 
 if __name__ == "__main__":

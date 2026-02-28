@@ -1,23 +1,24 @@
-def get_value_error():
+def get_value_error() -> dict:
     list = ["12", "100", "abc"]
     return list
+
 
 def get_zero_div_error():
     number = 0
     42 / number
 
+
 def get_file_error():
     f = open("missing.txt", "r")
     print(f.read())
+
+
 def get_key_error():
-    dic = {
-        "rose" : "red",
-        "oak" : "pink",
-        "jasmine" : "white"
-    }
+    dic = {"rose": "red", "oak": "pink", "jasmine": "white"}
     return dic
 
-def garden_operations(type):
+
+def garden_operations(type: str) -> None:
     if type == "ValueError":
         try:
             list = get_value_error()
@@ -41,19 +42,15 @@ def garden_operations(type):
     elif type == "KeyError":
         try:
             plants = get_key_error()
-            print(plants['missing'])
+            print(plants["missing"])
         except KeyError:
             print("Caught KeyError: 'missing\\_plant'")
 
 
-def test_error_types():
-    list = [
-        "ValueError",
-        "ZeroDivisionError",
-        "FileNotFoundError",
-        "KeyError"
-    ]
-    print("=== Garden Error Types Demo ===\n")
+def test_error_types() -> None:
+    list = ["ValueError", "ZeroDivisionError", "FileNotFoundError", "KeyError"]
+
+    print("=== Garden Error Types Demo ===")
     for e in list:
         print(f"\ntesting {e} ...")
         try:
@@ -61,5 +58,7 @@ def test_error_types():
         except Exception as e:
             print(e)
     print("\nAll error types tested successfully!")
+
+
 if __name__ == "__main__":
     test_error_types()

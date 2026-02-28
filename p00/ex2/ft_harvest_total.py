@@ -2,5 +2,5 @@ def ft_harvest_total() -> None:
     frs = int(input("day 1 harvest : "))
     sec = int(input("day 2 harvest : "))
     thr = int(input("day 3 harvest : "))
-    total = (frs + sec + thr)
+    total = frs + sec + thr
     print("total harvest is :", total)

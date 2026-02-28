@@ -11,9 +11,11 @@ class tree(Plant):
         self.diameter = diameter
 
     def produce_shade(self):
-        print(f"{self.name} (Tree) : {self.height} cm, {self.age} days,"
-              f" {self.diameter} cm diameter")
-        shade_area = 3.14 * ((20 * self.diameter / 200)**2)
+        print(
+            f"{self.name} (Tree) : {self.height} cm, {self.age} days,"
+            f" {self.diameter} cm diameter"
+        )
+        shade_area = 3.14 * ((20 * self.diameter / 200) ** 2)
         print(f"Oak provides {shade_area:.0f} square meters of shade\n")
 
 
@@ -23,21 +25,31 @@ class flower(Plant):
         self.color = color
 
     def bloom(self):
-        print(f"{self.name} (Flower) : {self.height} cm, {self.age} days,"
-              f" {self.color} color")
+        print(
+            f"{self.name} (Flower) : {self.height} cm, {self.age} days,"
+            f" {self.color} color"
+        )
         print("Rose is blooming beautifully!\n")
 
 
 class Vegetable(Plant):
-    def __init__(self, name: str, age: int, height: int,
-                 harvest_season: str, nutritional_value: str):
+    def __init__(
+        self,
+        name: str,
+        age: int,
+        height: int,
+        harvest_season: str,
+        nutritional_value: str,
+    ):
         super().__init__(name, age, height)
         self.harvest_season = harvest_season
         self.nutritional_value = nutritional_value
 
     def harvest(self):
-        print(f"{self.name} (Vergetebale) : {self.height} cm,{self.age} days,"
-              f" {self.harvest_season} harvest")
+        print(
+            f"{self.name} (Vergetebale) : {self.height} cm,{self.age} days,"
+            f" {self.harvest_season} harvest"
+        )
         print(f"Tomato is rich in vitamin {self.nutritional_value}\n")
 
 

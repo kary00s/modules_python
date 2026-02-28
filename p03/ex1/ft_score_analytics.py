@@ -1,8 +1,7 @@
 import sys
 
 
-def ft_score_analytics():
-    args = sys.argv
+def ft_score_analytics(args):
     i = 1
     lst = []
     try:
@@ -14,7 +13,11 @@ def ft_score_analytics():
     except ValueError:
         print("OOPS , you put an invalid argument")
 
+
+def checker():
     print("=== Player Score Analytics ===")
+    args = sys.argv
+    ft_score_analytics(args)
     if len(lst) > 0:
         print(f"Scores processed: {len(args) - 1}")
         print(f"Total score : {sum(lst)}")
@@ -23,9 +26,11 @@ def ft_score_analytics():
         print(f"Low score: {min(lst)}")
         print(f"Score range: {max(lst) - min(lst)}\n")
     else:
-        print("No scores provided. Usage: python3 ft_score_analytics.py"
-              " :wq!<score1> <score2> ...")
+        print(
+            "No scores provided. Usage: python3 ft_score_analytics.py"
+            " :wq!<score1> <score2> ..."
+        )
 
 
 if __name__ == "__main__":
-    ft_score_analytics()
+    checker()

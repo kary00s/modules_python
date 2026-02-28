@@ -13,12 +13,12 @@ class Plant:
 
 def main():
     plants = [
-            Plant("Rose", 25, 30),
-            Plant("Oak", 200, 365),
-            Plant("Cactus", 5, 90),
-            Plant("Sunflower", 80, 45),
-            Plant("Fern", 15, 120)
-            ]
+        Plant("Rose", 25, 30),
+        Plant("Oak", 200, 365),
+        Plant("Cactus", 5, 90),
+        Plant("Sunflower", 80, 45),
+        Plant("Fern", 15, 120),
+    ]
     for plant in plants:
         print(plant.creator())
     print(f"\nTotal plants created: {Plant.count}")

@@ -12,7 +12,6 @@ if __name__ == "__main__":
 
     print("=== Garden Plant Registry ===")
 
-    print(f"{sunflower.name} : {sunflower.height} cm, "
-          f"{sunflower.age} days old")
+    print(f"{sunflower.name} : {sunflower.height} cm, " f"{sunflower.age} days old")
     print(f"{rose.name} : {rose.height} cm, {rose.age} days old")
     print(f"{cactus.name} : {cactus.height} cm, {cactus.age} days old")
