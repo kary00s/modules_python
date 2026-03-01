@@ -1,54 +1,74 @@
 import math
 
 
-def get_cordinates(cordinate: list):
-    x = cordinate[0]
-    y = cordinate[1]
-    z = cordinate[2]
-    return x, y, z
+def position_creator(x, y, z):
+    return (x, y, z)
 
 
-def creator(cordinate: list):
-    x, y, z = get_cordinates(cordinate)
-    print(f"Position Created : ({x}, {y}, {z})")
+def distance_calculator(point1, point2):
+    x1, y1, z1 = point1
+    x2, y2, z2 = point2
+    distance = math.sqrt((x2 - x1)**2 + (y2 - y1)**2 + (z2 - z1)**2)
+    return distance
 
 
-def calculator(cor1, cor2=(0, 0, 0)):
-    x1, y1, z1 = get_cordinates(cor1)
-    x2, y2, z2 = get_cordinates(cor2)
-
-    distance = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2 + (z2 - z1) ** 2)
-    print(f"Distance between ({x2}, {y2}, {z2}) and " f"({x1}, {y1}, {z1}): {distance}")
-
-
-def check_cordinates(cordinate):
-    for position in cordinate:
-        if int(position):
-            pass
-        else:
-            raise ValueError(
-                "Error parsing coordinates: invalid"
-                f"literal for int() with base 10: {position}"
-            )
+def ft_len(lst: list) -> int:
+    counter = 0
+    for i in lst:
+        counter += 1
+    return counter
 
 
-def Parsing(position: str):
-    cordinate = position.split(",")
+def parser(coord_string):
     try:
-        check_cordinates(cordinate)
-    except ValueError as error:
-        print(error)
-    return cordinate
+        parts = coord_string.split(',')
+        if ft_len(parts) != 3:
+            raise ValueError("Coordinate string must contain exactly 3 values")
+
+        x = int(parts[0])
+        y = int(parts[1])
+        z = int(parts[2])
+        return position_creator(x, y, z)
+    except ValueError as e:
+        print(f"Error parsing coordinates: {e}")
+        print(f"Error details - Type: {type(e).__name__}, Args: {e.args}")
+        return None
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        return None
 
 
-def ft_coordinate_system(cordinate: str):
-    cordinate_list = Parsing(cordinate)
+def main():
+
+    print("=== Game Coordinate System ===\n")
+
+    pos1 = position_creator(10, 20, 5)
+    origin = position_creator(0, 0, 0)
+
+    print(f"Position created: {pos1}")
+    dist1 = distance_calculator(origin, pos1)
+    print(f"Distance between {origin} and {pos1}: {dist1:.2f}\n")
+
+    print('Parsing coordinates: "3,4,0"')
+    pos2 = parser("3,4,0")
+    if pos2:
+        print(f"Parsed position: {pos2}")
+        dist2 = distance_calculator(origin, pos2)
+        print(f"Distance between {origin} and {pos2}: {dist2:.1f}\n")
+
+    print('Parsing invalid coordinates: "abc,def,ghi"')
+    parser("abc,def,ghi")
+
+    print("\nUnpacking demonstration:")
+    if pos2:
+        x, y, z = pos2
+        print(f"Player at x={x}, y={y}, z={z}")
+        print(f"Coordinates: X={x}, Y={y}, Z={z}")
 
 
-def test_cordinates():
-    ## test without parsing   (10, 20, 5)
+if __name__ == "__main__":
+    try:
+        main()
 
-    ft_coordinate_system("4,46,6")
-
-
-test_cordinates()
+    except Exception as e:
+        print(e)
