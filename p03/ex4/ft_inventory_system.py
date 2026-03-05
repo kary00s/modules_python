@@ -1,7 +1,7 @@
 import sys
 
 
-def dict_creator(args):
+def dict_creator(args: list) -> dict:
     inventory = {}
     for item in args:
         try:
@@ -14,19 +14,19 @@ def dict_creator(args):
     return inventory
 
 
-def values_calculator(lst):
+def values_calculator(lst: list) -> int:
     counter = 0
     for item in lst:
         try:
             counter += int(item)
         except ValueError:
             print(f"The {item} should be a number")
-    print(f"Total items in inventory: {counter}")  
+    print(f"Total items in inventory: {counter}")
     print(f"Unique item types: {len(lst)}")
     return counter
 
 
-def current_inventory(inventory, total):
+def current_inventory(inventory: dict, total: int) -> list:
     i = 0
     key = [item for item in inventory.keys()]
     value = [item for item in inventory.values()]
@@ -38,7 +38,7 @@ def current_inventory(inventory, total):
     return key, value
 
 
-def statistics(keys, values):
+def statistics(keys: list, values: list) -> None:
     maxi = max(values)
     mini = min(values)
     i = 0
@@ -58,7 +58,8 @@ def statistics(keys, values):
                 break
             j += 1
 
-def Management_Suggestions(keys, values):
+
+def Management_Suggestions(keys: list, values: list) -> None:
     i = 0
     restock = []
     while i < len(values):
@@ -72,7 +73,8 @@ def Management_Suggestions(keys, values):
     else:
         print("No need for the Restock.")
 
-def Item_Categories(keys, values):
+
+def Item_Categories(keys: list, values: list) -> None:
     maxi = max(values)
     i = 0
     if maxi in values:
@@ -86,11 +88,13 @@ def Item_Categories(keys, values):
         print("Scarce : {", end="")
         while j < len(values):
             if i != j:
-                print(f"'{keys[j]}': ", values[j], end=", " if i + 1 != len(keys) else "")
+                print(f"'{keys[j]}': ", values[j],
+                      end=", " if i + 1 != len(keys) else "")
             j += 1
         print("}")
 
-def Properties_Demo(keys, values):
+
+def Properties_Demo(keys: list, values: list) -> None:
     i = 0
     print("Dictionary keys: ", end="")
     for item in keys:
@@ -104,7 +108,9 @@ def Properties_Demo(keys, values):
         i += 1
     print()
     print(f"Sample lookup - '{keys[0]}' in inventory: True")
-def main():
+
+
+def main() -> None:
     args = sys.argv
     if len(args) > 1:
         print("=== Inventory System Analysis ===\n")
@@ -123,9 +129,10 @@ def main():
 
         print("\n=== Management Suggestions ===")
         Management_Suggestions(keys, values)
-        
+
         print("\n\n=== Dictionary Properties Demo ===")
         Properties_Demo(keys, values)
+
 
 if __name__ == "__main__":
     try:

@@ -1,11 +1,11 @@
 import math
 
 
-def position_creator(x, y, z):
+def position_creator(x: int, y: int, z: int) -> tuple:
     return (x, y, z)
 
 
-def distance_calculator(point1, point2):
+def distance_calculator(point1: tuple, point2: tuple) -> int:
     x1, y1, z1 = point1
     x2, y2, z2 = point2
     distance = math.sqrt((x2 - x1)**2 + (y2 - y1)**2 + (z2 - z1)**2)
@@ -19,7 +19,7 @@ def ft_len(lst: list) -> int:
     return counter
 
 
-def parser(coord_string):
+def parser(coord_string: str) -> tuple:
     try:
         parts = coord_string.split(',')
         if ft_len(parts) != 3:
@@ -38,7 +38,7 @@ def parser(coord_string):
         return None
 
 
-def main():
+def main() -> None:
 
     print("=== Game Coordinate System ===\n")
 

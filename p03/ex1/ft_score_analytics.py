@@ -1,7 +1,7 @@
 import sys
 
 
-def ft_score_analytics():
+def ft_score_analytics() -> None:
     args = sys.argv
     i = 1
     lst = []

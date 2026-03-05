@@ -1,21 +1,24 @@
-def player_creator(achievements, name):
+def player_creator(achievements: set, name: str) -> None:
     print(f"Player {name} achievements: {achievements}")
 
 
-def unique_achievement(charlie_achiev, alice_achiev, bob_achiev):
+def unique_achievement(charlie_achiev: set,
+                       alice_achiev: set, bob_achiev: set) -> None:
     unique_achievement = set.union(charlie_achiev, alice_achiev, bob_achiev)
     print(f"All unique achievements: {unique_achievement}")
     print(f"Total unique achievements: {len(unique_achievement)}\n")
 
 
-def common_achievement(alice_achiev, charlie_achiev, bob_achiev):
+def common_achievement(alice_achiev: set,
+                       charlie_achiev: set, bob_achiev: set) -> None:
     common_achievement = set.intersection(
         alice_achiev, charlie_achiev, bob_achiev
     )
     print(f"Common to all players: {common_achievement}")
 
 
-def rare_achievements(alice_achiev, bob_achiev, charlie_achiev):
+def rare_achievements(alice_achiev: set,
+                      bob_achiev: set, charlie_achiev: set) -> None:
 
     alice_difference = set.difference(alice_achiev, bob_achiev, charlie_achiev)
     bob_difference = set.difference(bob_achiev, alice_achiev, charlie_achiev)
@@ -26,7 +29,7 @@ def rare_achievements(alice_achiev, bob_achiev, charlie_achiev):
     print(f"Rare achievements (1 player): {rare}\n")
 
 
-def players_stat(alice_achiev, bob_achiev):
+def players_stat(alice_achiev: set, bob_achiev: set) -> None:
     common_achiev = set.intersection(alice_achiev, bob_achiev)
     alice_unique = alice_achiev.difference(common_achiev)
     bob_unique = bob_achiev.difference(common_achiev)
@@ -35,7 +38,7 @@ def players_stat(alice_achiev, bob_achiev):
     print(f"Bob unique: {bob_unique}")
 
 
-def main():
+def main() -> None:
     print("=== Achievement Tracker System ===\n")
     alice_achievements = {
         "first_kill",
