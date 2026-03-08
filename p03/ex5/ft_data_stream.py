@@ -2,9 +2,7 @@ import time
 import random
 from typing import Generator
 
-# ───────────────────────────────────────────────
-# 1. Game event generator (the "data stream")
-# ───────────────────────────────────────────────
+
 def game_event_stream(count: int) -> Generator[str, None, None]:
     players = ["alice", "bob", "charlie", "diana", "emma", "frank", "grace"]
     actions = [
@@ -21,14 +19,10 @@ def game_event_stream(count: int) -> Generator[str, None, None]:
         player = random.choice(players)
         level = random.randint(1, 20)
         action = random.choice(actions)
-        
-        # We could also yield a dict/tuple → but string keeps output simple
+
         yield f"Player {player} (level {level}) {action}"
 
-
-# ───────────────────────────────────────────────
-# 2. Filtering generators (composable!)
-# ───────────────────────────────────────────────
+###########################
 def high_level_events(events: Generator[str, None, None]) -> Generator[str, None, None]:
     for event in events:
         if "(level " in event:
@@ -48,10 +42,7 @@ def level_up_events(events: Generator[str, None, None]) -> Generator[str, None, 
         if "leveled up" in event.lower():
             yield event
 
-
-# ───────────────────────────────────────────────
-# 3. Simple stats collector using generators
-# ───────────────────────────────────────────────
+#####################################
 def collect_stats(event_stream: Generator[str, None, None]) -> dict:
     total = 0
     high_level_count = 0
@@ -82,9 +73,7 @@ def collect_stats(event_stream: Generator[str, None, None]) -> dict:
     }
 
 
-# ───────────────────────────────────────────────
-# 4. Classic examples
-# ───────────────────────────────────────────────
+#########################################
 def fibonacci(n: int) -> Generator[int, None, None]:
     a, b = 0, 1
     for _ in range(n):
@@ -110,10 +99,7 @@ def primes(count: int) -> Generator[int, None, None]:
             found += 1
         num += 1
 
-
-# ───────────────────────────────────────────────
-# Main demonstration
-# ───────────────────────────────────────────────
+#########################################
 def main():
     print("=== Game Data Stream Processor ===")
     EVENT_COUNT = 1000

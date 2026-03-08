@@ -20,11 +20,10 @@ def ft_len(lst: list) -> int:
 
 
 def parser(coord_string: str) -> tuple:
+    parts = coord_string.split(',')
+    if ft_len(parts) != 3:
+        raise ValueError("Coordinate string must contain exactly 3 values")
     try:
-        parts = coord_string.split(',')
-        if ft_len(parts) != 3:
-            raise ValueError("Coordinate string must contain exactly 3 values")
-
         x = int(parts[0])
         y = int(parts[1])
         z = int(parts[2])
@@ -50,7 +49,7 @@ def main() -> None:
     print(f"Distance between {origin} and {pos1}: {dist1:.2f}\n")
 
     print('Parsing coordinates: "3,4,0"')
-    pos2 = parser("3,4,0")
+    pos2 = parser("3,4,5,0")
     if pos2:
         print(f"Parsed position: {pos2}")
         dist2 = distance_calculator(origin, pos2)
@@ -58,12 +57,11 @@ def main() -> None:
 
     print('Parsing invalid coordinates: "abc,def,ghi"')
     parser("abc,def,ghi")
-
     print("\nUnpacking demonstration:")
-    if pos2:
-        x, y, z = pos2
-        print(f"Player at x={x}, y={y}, z={z}")
-        print(f"Coordinates: X={x}, Y={y}, Z={z}")
+
+    x, y, z = pos2
+    print(f"Player at x={x}, y={y}, z={z}")
+    print(f"Coordinates: X={x}, Y={y}, Z={z}")
 
 
 if __name__ == "__main__":
