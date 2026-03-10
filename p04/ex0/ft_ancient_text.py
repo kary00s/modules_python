@@ -1,28 +1,28 @@
-def get_content(name: str) -> None:
+def get_data(name: str) -> None:
     try:
         file = open(name, "r")
-        file_content = file.read()
+        file_data = file.read()
         print("\nRECOVERED DATA:\n")
-        print(file_content)
+        print(file_data)
         file.close()
-    except IsADirectoryError:
-        print("\nERROR: cant read from directory")
     except IOError:
-        print("\nERROR: Unable to access storage vault")
+        print("\nERROR: Storage vault not found.")
     except FileNotFoundError:
         print(f"\nERROR: file not found (file : {name}).")
     except PermissionError:
         print("\nERROR: No permission to read this file.")
+    except IsADirectoryError:
+        print("\nERROR: cant read from directory")
 
 
 def main() -> None:
 
-    name = "ancient_fragment.txt"
+    file_name = "test"
     print("=== CYBER ARCHIVES - DATA RECOVERY SYSTEM ===")
     try:
-        print(f"\nAccessing Storage Vault: {name}")
+        print(f"\nAccessing Storage Vault: {file_name}")
         print("Connection established...")
-        get_content(name)
+        get_data(file_name)
     except Exception as e:
         print(e)
     print("\nData recovery complete. Storage unit disconnected.")
