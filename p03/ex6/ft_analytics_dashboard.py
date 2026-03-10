@@ -1,20 +1,22 @@
-# ft_analytics_dashboard.py
-
-def main():
-    # ─── Sample data ───────────────────────────────────────────────
+def main() -> None:
     players = ["alice", "bob", "charlie", "diana", "bob", "eve", "alice"]
-    scores  = [2300, 1800, 2150, 4600, 1200, 900, 2300]
+    scores = [2300, 1800, 2150, 4600, 1200, 900, 2300]
     regions = ["north", "east", "central", "north", "south", "east", "north"]
-    
     achievements = [
-        ("alice", "first_kill"), ("alice", "level_10"), ("alice", "boss_slayer"),
-        ("bob", "first_kill"), ("bob", "level_5"),
-        ("charlie", "boss_slayer"), ("charlie", "level_10"), ("charlie", "first_kill"),
-        ("charlie", "100_kills"), ("diana", "level_10"), ("diana", "boss_slayer"),
+        ("alice", "first_kill"),
+        ("alice", "level_10"),
+        ("alice", "boss_slayer"),
+        ("bob", "first_kill"),
+        ("bob", "level_5"),
+        ("charlie", "boss_slayer"),
+        ("charlie", "level_10"),
+        ("charlie", "first_kill"),
+        ("charlie", "100_kills"),
+        ("diana", "level_10"),
+        ("diana", "boss_slayer"),
         ("eve", "first_kill")
     ]
 
-    # Convert to more convenient structures
     player_scores = dict(zip(players, scores))
     player_achievements = {}
     for player, ach in achievements:
@@ -22,12 +24,7 @@ def main():
             player_achievements[player] = set()
         player_achievements[player].add(ach)
 
-    print("=== Game Analytics Dashboard ===")
-    print()
-
-    # ┌─────────────────────────────────────────────────────────────┐
-    # │                   LIST COMPREHENSIONS                        │
-    # └─────────────────────────────────────────────────────────────┘
+    print("=== Game Analytics Dashboard ===\n")
     print("=== List Comprehension Examples ===")
 
     high_scorers = [p for p, s in player_scores.items() if s >= 2000]
@@ -43,16 +40,10 @@ def main():
     print("Players from north       :", sorted(set(north_players)))
     print()
 
-    # ┌─────────────────────────────────────────────────────────────┐
-    # │                  DICT COMPREHENSIONS                        │
-    # └─────────────────────────────────────────────────────────────┘
     print("=== Dict Comprehension Examples ===")
-
-    # Already have player_scores, but let's recreate stylishly
     score_map = {p: s for p, s in zip(players, scores)}
     print("Player scores:", score_map)
 
-    # Score category count
     score_category = {
         "high":   sum(1 for s in scores if s >= 2000),
         "medium": sum(1 for s in scores if 1000 <= s < 2000),
@@ -60,19 +51,14 @@ def main():
     }
     print("Score distribution:", score_category)
 
-    # Achievement count per player (using dict comprehension)
-    ach_count = {player: len(achs) for player, achs in player_achievements.items()}
+    ach_count = {player: len(achs) for
+                 player, achs in player_achievements.items()}
     print("Achievement counts   :", ach_count)
 
-    # Player → region (last known region)
     last_region = {p: r for p, r in zip(players, regions)}
     print("Last known region    :", last_region)
-    print()
 
-    # ┌─────────────────────────────────────────────────────────────┐
-    # │                   SET COMPREHENSIONS                        │
-    # └─────────────────────────────────────────────────────────────┘
-    print("=== Set Comprehension Examples ===")
+    print("\n=== Set Comprehension Examples ===")
 
     unique_players = {p for p in players}
     print("Unique players          :", sorted(unique_players))
@@ -85,11 +71,7 @@ def main():
 
     high_score_players = {p for p, s in player_scores.items() if s >= 2000}
     print("High score players set  :", sorted(high_score_players))
-    print()
 
-    # ┌─────────────────────────────────────────────────────────────┐
-    # │                    COMBINED ANALYSIS                        │
-    # └─────────────────────────────────────────────────────────────┘
     print("=== Combined Analysis ===")
     total_players = len(unique_players)
     total_unique_ach = len(unique_achievements)
@@ -105,4 +87,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        print(e)
