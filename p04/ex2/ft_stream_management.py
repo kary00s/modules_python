@@ -1,7 +1,7 @@
 import sys
 
 
-def writer(stdout, stderr, id: str, status: str) -> None:
+def writer(stdout: any, stderr: any, id: str, status: str) -> None:
     stdout.write(f"\n[STANDARD] Archive status from {id}: {status}\n")
 
     stderr.write("[ALERT] System diagnostic: Communication channels "

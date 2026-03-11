@@ -1,11 +1,11 @@
-def extraction(file_name):
+def extraction(file_name: str) -> None:
     print("SECURE EXTRACTION:")
     with open(file_name, "r") as f:
         data = f.read()
         print(data)
 
 
-def preservation(file_name):
+def preservation(file_name: str) -> None:
     print("\nSECURE PRESERVATION:")
     data = "[CLASSIFIED] New security protocols archived"
     with open(file_name, "w") as f:
@@ -14,7 +14,7 @@ def preservation(file_name):
         print("Vault automatically sealed upon completion")
 
 
-def main():
+def main() -> None:
 
     print("=== CYBER ARCHIVES - VAULT SECURITY SYSTEM ===\n")
     print("Initiating secure vault access...")
@@ -23,7 +23,7 @@ def main():
     try:
         file_name = "extraction.txt"
         extraction(file_name)
-        file_name = "preservation.txt"
+        file_name = "alo.txt"
         preservation(file_name)
     except Exception as e:
         print(e)

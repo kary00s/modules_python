@@ -17,7 +17,7 @@ def get_data(name: str) -> None:
 
 def main() -> None:
 
-    file_name = "test"
+    file_name = "ancient_fragment.txt"
     print("=== CYBER ARCHIVES - DATA RECOVERY SYSTEM ===")
     try:
         print(f"\nAccessing Storage Vault: {file_name}")

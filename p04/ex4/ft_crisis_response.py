@@ -1,5 +1,6 @@
 
 def cheacker_file(file_name: str, mode: str) -> None:
+
     try:
         if mode == "r":
             with open(file_name, "r") as file:
@@ -14,10 +15,6 @@ def cheacker_file(file_name: str, mode: str) -> None:
 
         print("STATUS: Normal operations resumed\n")
 
-    except Exception as error:
-        print(f"CRISIS ALERT: Attempting access to '{file_name}'...")
-        print(f"Unexpected error during {mode}: {error}\n")
-
     except FileNotFoundError:
         print(f"CRISIS ALERT: Attempting access to '{file_name}'...")
         print("RESPONSE: Archive not found in storage matrix")
@@ -26,21 +23,24 @@ def cheacker_file(file_name: str, mode: str) -> None:
         print(f"CRISIS ALERT: Attempting access to '{file_name}'...")
         print("RESPONSE: Security protocols deny access")
         print("STATUS: Crisis handled, security maintained\n")
+    except Exception as error:
+        print(f"CRISIS ALERT: Attempting access to '{file_name}'...")
+        print(f"Unexpected error during {mode}: {error}\n")
 
 
 def main() -> None:
     print("=== CYBER ARCHIVES - CRISIS RESPONSE SYSTEM ===\n")
 
-    try:
-        cheacker_file("lost_archive.txt", "r")
-        cheacker_file("classified_vault.txt", "w")
-        cheacker_file("standard_archive.txt", "r")
-    except Exception as e:
-        print(e)
-
-    print("All crisis scenarios handled "
-          "successfully. Archives secure.")
+    cheacker_file("lost_archive.txt", "r")
+    cheacker_file("classified_vault.txt", "w")
+    cheacker_file("standard_archive.txt", "r")
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+        print("All crisis scenarios handled "
+              "successfully. Archives secure.")
+    except Exception as e:
+        print(e)
+        print("One of crisis scenarios failed")
