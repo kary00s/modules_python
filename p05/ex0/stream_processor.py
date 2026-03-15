@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
-from typing import Any, List, Union
+
+from typing import Any, List
+
 
 class DataProcessor(ABC):
     @abstractmethod
@@ -30,11 +32,11 @@ class NumericProcessor(DataProcessor):
     def process(self, data: List) -> str:
         print(f"Processing data: {data}")
         self.validate(data)
-  
+
         total = sum(data)
         count = len(data)
         if count > 0:
-            avg = total / count 
+            avg = total / count
         else:
             avg = 0
         return f"Processed {count} numeric values, sum={total}, avg={avg}"
@@ -72,22 +74,23 @@ class LogProcessor(DataProcessor):
         level = "UNKNOWN"
         if hint == "ERROR":
             level = "ALERT"
-        elif hint ==  "SUCCESS":
+        elif hint == "SUCCESS":
             level = "SUCCESS"
 
         return f"[{level}] {hint} level detected: {msg}"
 
 
-###################################################################################
 def data_processing(processor: DataProcessor, data: Any) -> None:
     print(f"\nInitializing {processor.__class__.__name__}...")
     result = processor.process(data)
     print("Output:", result)
 
+
 def data_distribution(data_lst: list) -> None:
     for item in data_lst:
         result = item[0].process(item[1])
         print(f"\nResult {item[1]}: {result}")
+
 
 if __name__ == "__main__":
     try:
