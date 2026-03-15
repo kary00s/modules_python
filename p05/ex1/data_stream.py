@@ -180,6 +180,7 @@ def main():
     processor.add_stream(trans)
     processor.add_stream(event)
 
+    mixed_event_batch = ["login", "logout", "error"]
     mixed_sensor_batch = [{"temp": 35}, {"temp": 40}]
     mixed_trans_batch = [
         {"type": "buy", "amount": 50},
@@ -187,7 +188,6 @@ def main():
         {"type": "sell", "amount": 30},
         {"type": "sell", "amount": 40}
     ]
-    mixed_event_batch = ["login", "logout", "error"]
 
     processor.process_mixed_batches([mixed_sensor_batch,
                                      mixed_trans_batch, mixed_event_batch])

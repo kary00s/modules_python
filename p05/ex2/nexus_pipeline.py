@@ -3,7 +3,8 @@ from typing import Any, Dict, List, Union, Protocol
 
 
 class ProcessingStage(Protocol):
-    def process(self, data: Any) -> Any: ...
+    def process(self, data: Any) -> Any:
+        pass
 
 
 class BaseProcessingPipeline(ABC):
@@ -19,7 +20,7 @@ class BaseProcessingPipeline(ABC):
     def add_stage(self, stage: ProcessingStage) -> None:
         self.stages.append(stage)
 
-    def _execute_stages(self, data: Any) -> Any:
+    def execute_stages(self, data: Any) -> Any:
         current = data
         try:
             for stage in self.stages:
@@ -35,12 +36,10 @@ class BaseProcessingPipeline(ABC):
 
     @abstractmethod
     def process(self, data: Any) -> Any:
-        """Main entry point for processing data through this pipeline."""
         pass
 
 
 class InputValidationStage:
-    """Validates and normalizes incoming data into a dict-like structure."""
     def process(self, data: Any) -> dict:
         if data is None:
             raise ValueError("Input cannot be None")
@@ -57,7 +56,6 @@ class InputValidationStage:
 
 
 class EnrichmentStage:
-    """Adds basic metadata to the data."""
     def process(self, data: Any) -> dict:
         if isinstance(data, dict):
             enriched = dict(data)
@@ -77,7 +75,6 @@ class EnrichmentStage:
 
 
 class FormattingStage:
-    """Produces final human-readable string output."""
     def process(self, data: Any) -> str:
         if isinstance(data, dict) and "raw" in data:
             return f"Output: processed input -> {data['raw']}"
@@ -85,7 +82,6 @@ class FormattingStage:
 
 
 class JSONPipeline(BaseProcessingPipeline):
-    """Handles JSON-like string input."""
 
     def __init__(self, pipeline_id: str):
         super().__init__(pipeline_id)
@@ -94,15 +90,14 @@ class JSONPipeline(BaseProcessingPipeline):
         self.add_stage(FormattingStage())
 
     def process(self, data: Any) -> str:
-        if not isinstance(data, str) or not data.strip().startswith("{"):
+        if not isinstance(data, str):
             raise ValueError("Expected JSON-like string input")
 
         parsed = {"raw": data, "format": "json"}
-        return self._execute_stages(parsed)
+        return self.execute_stages(parsed)
 
 
 class CSVPipeline(BaseProcessingPipeline):
-    """Handles simple comma-separated values."""
 
     def __init__(self, pipeline_id: str):
         super().__init__(pipeline_id)
@@ -122,15 +117,13 @@ class CSVPipeline(BaseProcessingPipeline):
         }
 
         try:
-            result = self._execute_stages(parsed)
+            result = self.execute_stages(parsed)
             return f"CSV pipeline output: {result}"
         except Exception as exc:
             return f"CSVAdapter error: {exc}"
 
 
 class StreamPipeline(BaseProcessingPipeline):
-    """Handles numeric stream / list data."""
-
     def __init__(self, pipeline_id: str):
         super().__init__(pipeline_id)
         self.add_stage(InputValidationStage())
@@ -145,7 +138,7 @@ class StreamPipeline(BaseProcessingPipeline):
                 try:
                     readings.append(float(item))
                 except (TypeError, ValueError):
-                    pass  # skip invalid values silently
+                    pass
 
         parsed = {
             "raw": "Real-time sensor stream",
@@ -154,12 +147,13 @@ class StreamPipeline(BaseProcessingPipeline):
             "avg": sum(readings) / len(readings) if readings else 0.0,
         }
 
-        result = self._execute_stages(parsed)
+        result = self.execute_stages(parsed)
         return f"Stream summary: {result}"
 
 
 class PipelineManager:
-    """Manages multiple pipelines and supports batch & chaining."""
+
+    results = []
 
     def __init__(self):
         self._pipelines: List[BaseProcessingPipeline] = []
@@ -169,18 +163,21 @@ class PipelineManager:
             raise TypeError("Only pipeline instances can be registered")
         self._pipelines.append(pipeline)
 
-    def process_batch(self, items: List[Any]) -> List[Any]:
-        results = []
-        for i, (pipeline, item) in enumerate(zip(self._pipelines, items), 1):
+    def process_batch(self, data_items: List[Any]) -> List[Any]:
+        idx = 0
+
+        results: List[Any] = []
+        for pipeline, item in zip(self._pipelines, data_items):
             try:
                 result = pipeline.process(item)
                 results.append(result)
+                idx += 1
             except Exception:
-                print(f"Error detected in Stage {i}: Invalid data format")
+                print(f"Error detected in Stage {idx + 1}:"
+                      " Invalid data format")
                 print("Recovery initiated: Switching to backup processor")
-                print("Recovery successful: Pipeline restored, "
-                      "processing resumed")
-                results.append(None)
+                print("Recovery successful: Pipeline restored,"
+                      " processing resumed")
         return results
 
     def chain(self, pipelines: List[BaseProcessingPipeline], data: Any) -> Any:
@@ -231,14 +228,12 @@ def main():
     json_input = '{"sensor": "temp", "value": 23.5, "unit": "C"}'
     print("Processing JSON data through pipeline...")
     print(f"Input: {json_input}")
-    print(json_pipe.process(json_input))
-    print()
+    print(json_pipe.process(json_input), "\n")
 
     csv_input = "user,action,timestamp"
     print("Processing CSV data through same pipeline...")
     print(f'Input: "{csv_input}"')
-    print(csv_pipe.process(csv_input))
-    print()
+    print(csv_pipe.process(csv_input), "\n")
 
     stream_input = [21.5, 22.3, 23.0, 21.9, 22.0]
     print("Processing Stream data through same pipeline...")
