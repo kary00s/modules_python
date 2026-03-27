@@ -29,7 +29,7 @@ class SensorStream(DataStream):
     def process_batch(self, data_batch: List[Any]) -> str:
         if not isinstance(data_batch, list):
             raise ValueError("Data batch must be a list")
-
+    
         self.processed_count += len(data_batch)
 
         temps = [item.get("temp", 0) for
