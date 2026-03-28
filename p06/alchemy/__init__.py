@@ -1,4 +1,4 @@
-from .elements import create_fire, create_water
+from .elements import create_fire, create_water  # noqa: F401
 
 __author__ = "Master Pythonicus"
 __version__ = "1.0.0"

@@ -1,12 +1,26 @@
 from alchemy import elements
+
+
 def healing_potion():
-    return f"Healing potion brewed with {elements.create_fire()} and {elements.create_water()}"
+    ret = f"Healing potion brewed with {elements.create_fire()}"
+    ret += f"and {elements.create_water()}"
+    return ret
+
 
 def strength_potion():
-    return f"Strength potion brewed with {elements.create_earth()} and {elements.create_fire()}"
+    ret = f"Strength potion brewed with {elements.create_earth()}"
+    ret += f" and {elements.create_fire()}"
+    return ret
+
 
 def invisibility_potion():
-    return f"Invisibility potion brewed with {elements.create_air()} and {elements.create_water()}"
+    ret = f"Invisibility potion brewed with {elements.create_air()}"
+    ret += f" and {elements.create_water()}"
+    return ret
+
 
 def wisdom_potion():
-    return f"Wisdom potion brewed with all elements: [{elements.create_air()}, {elements.create_fire()}, {elements.create_water()}, {elements.create_earth()}"
+    ret = f"Wisdom potion brewed with all elements: [{elements.create_air()}"
+    ret += f", {elements.create_fire()}, {elements.create_water()},"
+    ret += f" {elements.create_earth()}"
+    return ret
