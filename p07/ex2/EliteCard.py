@@ -19,7 +19,6 @@ class EliteCard(Card, Combatable, Magical):
         self.defense = defense
         self.mana_pool = mana_pool
 
-    # ── Card ──────────────────────────────────────────────────────────────
     def play(self, game_state: dict) -> dict:
         return {
             "card_played": self.name,
@@ -35,23 +34,22 @@ class EliteCard(Card, Combatable, Magical):
         info["mana_pool"] = self.mana_pool
         return info
 
-    # ── Combatable ────────────────────────────────────────────────────────
+
     def attack(self, target) -> dict:
-        target_name = target.name if hasattr(target, "name") else str(target)
         return {
             "attacker":    self.name,
-            "target":      target_name,
+            "target":      target,
             "damage":      self.attack_power,
             "combat_type": "melee",
         }
 
     def defend(self, incoming_damage: int) -> dict:
-        blocked    = min(self.defense, incoming_damage)
-        taken      = incoming_damage - blocked
+        damage_blocked   = min(self.defense, incoming_damage)
+        damage_taken     = incoming_damage - damage_blocked
         return {
             "defender":      self.name,
-            "damage_taken":  taken,
-            "damage_blocked": blocked,
+            "damage_taken":  damage_taken,
+            "damage_blocked": damage_blocked,
             "still_alive":   True,
         }
 
@@ -62,11 +60,12 @@ class EliteCard(Card, Combatable, Magical):
             "defense": self.defense,
         }
 
-    # ── Magical ───────────────────────────────────────────────────────────
     def cast_spell(self, spell_name: str, targets: list) -> dict:
-        mana_cost = len(targets) * 2
+        target_names = []
+        mana_cost = len(targets)
         self.mana_pool -= mana_cost
-        target_names = [t.name if hasattr(t, "name") else str(t) for t in targets]
+        for item in targets:
+            target_names.append(item)
         return {
             "caster":   self.name,
             "spell":    spell_name,
