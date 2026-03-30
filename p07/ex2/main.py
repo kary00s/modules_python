@@ -25,6 +25,7 @@ def main():
 
     print("\nMultiple interface implementation successful!")
 
+
 if __name__ == "__main__":
     try:
         main()

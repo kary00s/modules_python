@@ -1,15 +1,16 @@
-from ex0.Card import Card
 from ex3.CardFactory import CardFactory
 from ex3.GameStrategy import GameStrategy
 
-class GameEngine():
+
+class GameEngine:
     def __init__(self):
         self.factory = None
         self.strategy = None
         self.total_simulation = 0
         self.hand = None
 
-    def configure_engine(self, factory: CardFactory, strategy: GameStrategy) -> None:
+    def configure_engine(self, factory: CardFactory,
+                         strategy: GameStrategy) -> None:
         self.factory = factory
         self.strategy = strategy
 
@@ -24,5 +25,5 @@ class GameEngine():
             "turns_simulated": self.total_simulation,
             "strategy_used": self.strategy,
             "total_damage": damage,
-            "cards_created": cards
+            "cards_created": cards,
         }

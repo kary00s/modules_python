@@ -36,8 +36,8 @@ class Deck:
         creatures = sum(1 for c in self._cards if isinstance(c, CreatureCard))
         return {
             "total_cards": total,
-            "creatures":   creatures,
-            "spells":      spells,
-            "artifacts":   artifacts,
-            "avg_cost":    cost,
+            "creatures": creatures,
+            "spells": spells,
+            "artifacts": artifacts,
+            "avg_cost": cost,
         }

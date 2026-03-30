@@ -1,7 +1,6 @@
 from ex3.AggressiveStrategy import AggressiveStrategy
 from ex3.FantasyCardFactory import FantasyCardFactory
 from ex3.GameEngine import GameEngine
-from ex0.Card import Card
 
 
 def main():
@@ -12,15 +11,16 @@ def main():
 
     factory = FantasyCardFactory()
     factory.available = {
-            "creatures": ["dragon", "goblin"],
-            "spells": ["fireball"],
-            "artifacts": ["mana_ring"]
-        }
+        "creatures": ["dragon", "goblin"],
+        "spells": ["fireball"],
+        "artifacts": ["mana_ring"],
+    }
     print(f"Available types: {factory.get_supported_types()}")
 
     print("\nSimulating aggressive turn...")
     engine = GameEngine()
-    engine.hand = ["Fire Dragon (5)", "Goblin Warrior (2)", "Lightning Bolt (3)"]
+    engine.hand = ["Fire Dragon (5)", "Goblin Warrior (2)",
+                   "Lightning Bolt (3)"]
     print(f"Hand: {engine.simulate_turn()}")
 
     print("\nTurn execution:")
@@ -28,19 +28,18 @@ def main():
     strategy = AggressiveStrategy()
 
     strategy.action = {
-            "cards_played": ["Goblin Warrior", "Lightning Bolt"],
-            "mana_used": 5,
-            "targets_attacked": ["Enemy Player"],
-            "damage_dealt": 8
-            }
+        "cards_played": ["Goblin Warrior", "Lightning Bolt"],
+        "mana_used": 5,
+        "targets_attacked": ["Enemy Player"],
+        "damage_dealt": 8,
+    }
     print(f"Acrions: {strategy.execute_turn(None, None)}")
 
     print("\nGame Report:", end="\n")
     print(engine.get_engine_status())
 
-    print(
-        "\nAbstract Factory + Strategy Pattern: Maximum flexibility achieved!"
-    )
+    print("\nAbstract Factory + Strategy Pattern: "
+          "Maximum flexibility achieved!")
 
 
 if __name__ == "__main__":

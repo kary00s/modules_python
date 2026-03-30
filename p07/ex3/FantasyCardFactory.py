@@ -15,7 +15,7 @@ class FantasyCardFactory(CardFactory):
         return CreatureCard("Goblin Warrior", 2, "Common", 2, 2)
 
     def create_spell(self, name_or_power=None):
-        return SpellCard("Lightning Bolt", 3, "Rare", _)
+        return SpellCard("Lightning Bolt", 3, "Rare", None)
 
     def create_artifact(self, name_or_power=None):
         return ArtifactCard("Mana Ring", 1, "Rare", 3, "Gain mana")
@@ -24,10 +24,10 @@ class FantasyCardFactory(CardFactory):
         result = [
             self.create_creature("dragon"),
             self.create_creature("goblin"),
-            self.create_spell()
+            self.create_spell(),
         ]
         return {"deck": result, "size": len(result)}
 
     def get_supported_types(self) -> dict:
-        
+
         return self.available

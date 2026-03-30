@@ -11,7 +11,8 @@ def deck_creator() -> Deck:
 
     creature_deck = CreatureCard("Fire Dragon", 5, "Legendary", 7, 5)
     spell_deck = SpellCard("Lightning Bolt", 3, "Rare", "damage")
-    artifact_deck = ArtifactCard("Mana Crystal", 2, "Uncommon", 3, "+1 mana per turn")
+    artifact_deck = ArtifactCard("Mana Crystal", 2,
+                                 "Uncommon", 3, "+1 mana per turn")
 
     deck.add_card(creature_deck)
     deck.add_card(spell_deck)
@@ -40,9 +41,7 @@ def main() -> None:
         play_result: Dict[str, Any] = card.play({})
         print(f"Play result: {play_result}\n")
 
-    print(
-        "Polymorphism in action: Same interface, different card behaviors!"
-    )
+    print("Polymorphism in action: Same interface, different card behaviors!")
 
 
 if __name__ == "__main__":
