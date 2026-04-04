@@ -8,6 +8,7 @@ def check_dependencies():
                          ["matplotlib","Visualization ready"],
                          ]
     try:
+        print("Checking dependencies:")
         for item in dependencies_list:
             dependencie = importlib.import_module(item[0])
             vers = dependencie.__version__
@@ -21,17 +22,15 @@ def analyze_matrix(file_name: str) -> None:
     import numpy 
     import pandas
 
-    print("\nAnalyzing Matrix data...")
-    print("Processing 1000 data points...")
     
-    data = numpy.random.normal(loc=0.5, scale=0.15, size=1000)
+    data = numpy.random.normal(loc=5, scale=10, size=1000)
     df = pandas.DataFrame(data, columns=["Values"])
     
-    print("Generating visualization...")
-    matplotlib.pyplot.hist(df["Values"], bins=30, color="green", edgecolor="black")
-    matplotlib.pyplot.title("Matrix Data Distribution")
-    matplotlib.pyplot.xlabel("Value")
-    matplotlib.pyplot.ylabel("Frequency")
+
+    matplotlib.pyplot.hist(df["Values"], bins=100, color="orange", edgecolor="black")
+    matplotlib.pyplot.title("Matrix_Data")
+    matplotlib.pyplot.xlabel("x_label")
+    matplotlib.pyplot.ylabel("y_label")
     matplotlib.pyplot.savefig(file_name)
     matplotlib.pyplot.close()
     
@@ -39,6 +38,16 @@ def analyze_matrix(file_name: str) -> None:
     print(f"Results saved to: {file_name}")
 
 def main():
-    
+    print("LOADING STATUS: Loading programs...\n")
+    check_dependencies()
 
+    print("\nAnalyzing Matrix data...")
+    print("Processing 1000 data points...")
+    print("Generating visualization...")
+    analyze_matrix("matrix_data")
 
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as error:
+        print(error)
