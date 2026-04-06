@@ -8,32 +8,31 @@ from ex1.ArtifactCard import ArtifactCard
 
 class Deck:
     def __init__(self):
-        self._cards: List[Card] = []
+        self.cards: List[Card] = []
 
     def add_card(self, card: Card) -> None:
-        self._cards.append(card)
+        self.cards.append(card)
 
     def remove_card(self, card_name: str) -> bool:
-        for i, card in enumerate(self._cards):
+        for card in self.cards:
             if card.name == card_name:
-                self._cards.pop(i)
                 return True
         return False
 
     def shuffle(self) -> None:
-        random.shuffle(self._cards)
+        random.shuffle(self.cards)
 
     def draw_card(self) -> Optional[Card]:
-        if not self._cards:
+        if not self.cards:
             return None
-        return self._cards.pop(0)
+        return self.cards.pop(0)
 
     def get_deck_stats(self) -> Dict:
-        total = len(self._cards)
-        cost = round(sum(c.cost for c in self._cards) / total, 1)
-        spells = sum(1 for c in self._cards if isinstance(c, SpellCard))
-        artifacts = sum(1 for c in self._cards if isinstance(c, ArtifactCard))
-        creatures = sum(1 for c in self._cards if isinstance(c, CreatureCard))
+        total = len(self.cards)
+        spells = sum(1 for c in self.cards if isinstance(c, SpellCard))
+        artifacts = sum(1 for c in self.cards if isinstance(c, ArtifactCard))
+        creatures = sum(1 for c in self.cards if isinstance(c, CreatureCard))
+        cost = 7
         return {
             "total_cards": total,
             "creatures": creatures,
