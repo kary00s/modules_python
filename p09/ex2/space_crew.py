@@ -1,7 +1,6 @@
-from pydantic import BaseModel, Field, ValidationError, model_validator
+from pydantic import BaseModel, Field, model_validator
 from enum import Enum, auto
 from datetime import datetime
-
 
 
 class Rank(Enum):
@@ -37,6 +36,7 @@ class SpaceMission(BaseModel):
         if not self.mission_id.startswith("M"):
             raise Exception("Mission ID must start with 'M'")
         return self
+
     @model_validator(mode="after")
     def rank_validator(self):
         counter = 0
@@ -46,6 +46,7 @@ class SpaceMission(BaseModel):
         if counter == 0:
             raise Exception("Must have at least one Commander or Captain")
         return self
+
     @model_validator(mode="after")
     def duration_validator(self):
         counter = 0
@@ -56,59 +57,61 @@ class SpaceMission(BaseModel):
                     counter += 1
                 if counter < total / 2:
                     raise Exception(
-                        "Long missions (> 365 days) require at least 50% experienced crew (5+ years)"
+                        "Long missions (> 365 days) require at least "
+                        "50 experienced crew (5+ years)"
                     )
         return self
 
     @model_validator(mode="after")
-    def active_validator(self) ->  any:
-        counter = 0
+    def active_validator(self) -> any:
         for item in self.crew:
-            if item.is_active is False :
+            if item.is_active is False:
                 raise Exception("All crew members must be active")
         return self
+
 
 def main():
     try:
         print("Space Mission Crew Validation")
         print("=========================================")
         valid = SpaceMission(
-                            mission_id="M2024_MARS",
-                            mission_name="Mars Colony Establishment",
-                            destination="Mars",
-                            lanch_date=datetime.now(),
-                            duration_days=900,
-                            crew=[
-                                CrewMember(
-                                    member_id="M01",
-                                    name="Sarah Connor",
-                                    rank=Rank.COMMANDER,
-                                    age=40,
-                                    specialization="Mission Command",
-                                    years_experience=6,
-                                    is_active=True)
-                                ,
-                                CrewMember(
-                                    member_id="M02",
-                                    name="John Smith",
-                                    rank=Rank.LIEUTENANT,
-                                    age=50,
-                                    specialization="navigation",
-                                    years_experience=9,
-                                    is_active=True,)
-                                ,
-                                CrewMember(
-                                    member_id="M03",
-                                    name="Alice Johnson",
-                                    rank=Rank.OFFICER,
-                                    age=25,
-                                    specialization="Engineering",
-                                    years_experience=14,
-                                    is_active=True)]
-                                ,
-                            mission_status="Mars",
-                            budget_millions=2500.0
-                        )
+            mission_id="M2024_MARS",
+            mission_name="Mars Colony Establishment",
+            destination="Mars",
+            lanch_date=datetime(2020, 1, 1, 3, 50, 50),
+            duration_days=900,
+            crew=[
+                CrewMember(
+                    member_id="M01",
+                    name="Sarah Connor",
+                    rank=Rank.COMMANDER,
+                    age=40,
+                    specialization="Mission Command",
+                    years_experience=6,
+                    is_active=True,
+                ),
+                CrewMember(
+                    member_id="M02",
+                    name="John Smith",
+                    rank=Rank.LIEUTENANT,
+                    age=50,
+                    specialization="navigation",
+                    years_experience=9,
+                    is_active=True,
+                ),
+                CrewMember(
+                    member_id="M03",
+                    name="Alice Johnson",
+                    rank=Rank.OFFICER,
+                    age=25,
+                    specialization="Engineering",
+                    years_experience=14,
+                    is_active=True,
+                ),
+            ],
+            mission_status="Mars",
+            budget_millions=2500.0,
+        )
         print(f"Mission: {valid.mission_name}")
         print(f"Destination: {valid.destination}")
         print(f"Duration: {valid.duration_days} days")
@@ -118,49 +121,50 @@ def main():
         for item in valid.crew:
             print(
                 f"- {item.name}"
-                f" ({item.rank.name.lower()}) - {item.specialization}"
+                f" ({item.rank.name.lower()})"
+                f"- {item.specialization}"
             )
-    
-    
+
         print("\n=========================================")
-        prtin("Expected validation error:")
+        print("Expected validation error:")
         invalid = SpaceMission(
-                                mission_id="M2026_MOON",
-                                mission_name="Moon Colony a77",
-                                destination="Moon",
-                                lanch_date=datetime.now(),
-                                duration_days=10,
-                                crew=[
-                                    CrewMember(
-                                        member_id="M01",
-                                        name="yassin alo",
-                                        rank=Rank.LIEUTENANT,
-                                        age=40,
-                                        specialization="Nothing",
-                                        years_experience=6,
-                                        is_active=True)
-                                ,
-                                    CrewMember(
-                                        member_id="M02",
-                                        name="karim nahiz",
-                                        rank=Rank.CADET,
-                                        age=50,
-                                        specialization="navigation",
-                                        years_experience=9,
-                                        is_active=True,)
-                                    ,
-                                    CrewMember(
-                                        member_id="M03",
-                                        name="marouan nahiz",
-                                        rank=Rank.OFFICER,
-                                        age=26,
-                                        specialization="Cadet",
-                                        years_experience=14,
-                                        is_active=True)]
-                                ,
-                                mission_status="Mars",
-                                budget_millions=2500.0
-                            )
+            mission_id="M2026_MOON",
+            mission_name="Moon Colony a77",
+            destination="Moon",
+            lanch_date=datetime(2020, 1, 1, 3, 50, 50),
+            duration_days=10,
+            crew=[
+                CrewMember(
+                    member_id="M01",
+                    name="yassin alo",
+                    rank=Rank.LIEUTENANT,
+                    age=40,
+                    specialization="Nothing",
+                    years_experience=6,
+                    is_active=True,
+                ),
+                CrewMember(
+                    member_id="M02",
+                    name="karim nahiz",
+                    rank=Rank.CADET,
+                    age=50,
+                    specialization="navigation",
+                    years_experience=9,
+                    is_active=True,
+                ),
+                CrewMember(
+                    member_id="M03",
+                    name="marouan nahiz",
+                    rank=Rank.OFFICER,
+                    age=26,
+                    specialization="Cadet",
+                    years_experience=14,
+                    is_active=True,
+                ),
+            ],
+            mission_status="Mars",
+            budget_millions=2500.0,
+        )
         print(f"Mission: {invalid.mission_name}")
         print(f"Destination: {invalid.destination}")
         print(f"Duration: {invalid.duration_days} days")
@@ -170,4 +174,9 @@ def main():
     except Exception as e:
         print(e)
 
-main()
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as e:
+        print(e)

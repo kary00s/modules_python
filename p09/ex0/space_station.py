@@ -2,6 +2,7 @@ from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import Optional
 
+
 class SpaceStation(BaseModel):
     station_id: str = Field(..., min_length=3, max_length=10)
     name: str = Field(..., min_length=1, max_length=50)
@@ -12,7 +13,8 @@ class SpaceStation(BaseModel):
     is_operational: bool = True
     notes: Optional[str] = Field(None, max_length=200)
 
-def main(): 
+
+def main():
     try:
         valid = SpaceStation(
             station_id="SS-001",
@@ -29,20 +31,19 @@ def main():
         print("========================================")
         print("Valid station created:")
         print(f"Station ID: {valid.station_id}")
-        print(f"Name: {valid.name}") 
-        print(f"Crew Size: {valid.crew_size} people") 
-        print(f"Power Level: {valid.power_level}%") 
-        print(f"Oxygen Level: {valid.oxygen_level}%") 
-        print(f"Last Maintenance: {valid.last_maintenance}") 
+        print(f"Name: {valid.name}")
+        print(f"Crew Size: {valid.crew_size} people")
+        print(f"Power Level: {valid.power_level}%")
+        print(f"Oxygen Level: {valid.oxygen_level}%")
+        print(f"Last Maintenance: {valid.last_maintenance}")
         if valid.is_operational is True:
-            stats = "Operational" 
+            stats = "Operational"
         else:
             stats = "Non-operational"
-        print(f"Status: {stats}") 
-        print(f"Notes: {valid.notes}") 
+        print(f"Status: {stats}")
+        print(f"Notes: {valid.notes}")
     except Exception as e:
         print(e)
-
 
     try:
         print("\n========================================")
@@ -57,9 +58,11 @@ def main():
             is_operational=True,
             notes="All systems nominal.",
         )
-        print(f"Crew Size: {invalid.crew_size} people") 
+        print(f"Crew Size: {invalid.crew_size} people")
     except Exception as e:
         print(e.errors()[0]["msg"], end="\n\n")
+
+
 if __name__ == "__main__":
     try:
         main()
