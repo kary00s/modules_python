@@ -69,9 +69,10 @@ class SpaceMission(BaseModel):
         return self
 
 def main():
-    
-    
-    valid = SpaceMission(
+    try:
+        print("Space Mission Crew Validation")
+        print("=========================================")
+        valid = SpaceMission(
                             mission_id="M2024_MARS",
                             mission_name="Mars Colony Establishment",
                             destination="Mars",
@@ -108,16 +109,65 @@ def main():
                             mission_status="Mars",
                             budget_millions=2500.0
                         )
-    print(f"Mission: {valid.mission_name}")
-    print(f"Destination: {valid.destination}")
-    print(f"Duration: {valid.duration_days} days")
-    print(f"Budget: ${valid.budget_millions}M")
-    print(f"Crew size: {len(valid.crew)}")
-    print("Crew members:")
-    for item in valid.crew:
-        print(
-            f"- {item.name}"
-            f" ({item.rank.name.lower()}) - {item.specialization}"
-        )
+        print(f"Mission: {valid.mission_name}")
+        print(f"Destination: {valid.destination}")
+        print(f"Duration: {valid.duration_days} days")
+        print(f"Budget: ${valid.budget_millions}M")
+        print(f"Crew size: {len(valid.crew)}")
+        print("Crew members:")
+        for item in valid.crew:
+            print(
+                f"- {item.name}"
+                f" ({item.rank.name.lower()}) - {item.specialization}"
+            )
+    
+    
+        print("\n=========================================")
+        prtin("Expected validation error:")
+        invalid = SpaceMission(
+                                mission_id="M2026_MOON",
+                                mission_name="Moon Colony a77",
+                                destination="Moon",
+                                lanch_date=datetime.now(),
+                                duration_days=10,
+                                crew=[
+                                    CrewMember(
+                                        member_id="M01",
+                                        name="yassin alo",
+                                        rank=Rank.LIEUTENANT,
+                                        age=40,
+                                        specialization="Nothing",
+                                        years_experience=6,
+                                        is_active=True)
+                                ,
+                                    CrewMember(
+                                        member_id="M02",
+                                        name="karim nahiz",
+                                        rank=Rank.CADET,
+                                        age=50,
+                                        specialization="navigation",
+                                        years_experience=9,
+                                        is_active=True,)
+                                    ,
+                                    CrewMember(
+                                        member_id="M03",
+                                        name="marouan nahiz",
+                                        rank=Rank.OFFICER,
+                                        age=26,
+                                        specialization="Cadet",
+                                        years_experience=14,
+                                        is_active=True)]
+                                ,
+                                mission_status="Mars",
+                                budget_millions=2500.0
+                            )
+        print(f"Mission: {invalid.mission_name}")
+        print(f"Destination: {invalid.destination}")
+        print(f"Duration: {invalid.duration_days} days")
+        print(f"Budget: ${invalid.budget_millions}M")
+        print(f"Crew size: {len(invalid.crew)}")
+        print("Crew members:")
+    except Exception as e:
+        print(e)
 
 main()
