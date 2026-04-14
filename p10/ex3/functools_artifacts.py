@@ -14,15 +14,23 @@ def spell_reducer(spells: list[int], operation: str) -> int:
     else:
         return 0
 
+
 def partial_enchanter(base_enchantment: callable) -> dict[str, callable]:
-    lightning_enchanter = partial(base_enchantment, power=50, element="lightning")
-    ice = partial(base_enchantment, power=100, element="ice")
+    ghost = partial(base_enchantment, power=100, element="ghost")
+    speed = partial(base_enchantment, power=50, element="speed")
     fire = partial(base_enchantment, power=100, element="fire")
+
     return {
-        "fire_enchant": fire,
-        "ice_enchant": ice,
-        "lightning_enchant": lightning_enchanter,
+        "fire_enchanter": fire,
+        "speed_enchanter": speed,
+        "ghost_enchanter": ghost,
     }
+
+
+def base_enchantment(power: int, element: str, target: str) -> str:
+    return (
+        f"Enchantment with power {power}" f" and element {element} applied to {target}"
+    )
 
 
 @lru_cache(maxsize=None)
@@ -39,7 +47,7 @@ def spell_dispatcher(_: Any) -> callable:
 
 @spell_dispatcher.register
 def _(damage_spell: int) -> callable:
-    return lambda x: f"Damage spell: {damage_spell + x} damage"
+    return lambda x: f"Damage sepll: {damage_spell + x} damage"
 
 
 @spell_dispatcher.register
@@ -51,12 +59,6 @@ def _(enchantment: str) -> callable:
 def _(multi_cast: list) -> callable:
     return lambda _: f"Multi-cast: {len(multi_cast)} spells"
 
-
-def base_enchantment(power: int, element: str, target: str) -> str:
-    return (
-        f"Enchantment with power {power}"
-        f" and element {element} applied to {target}"
-    )
 
 def main() -> None:
     try:
@@ -89,6 +91,7 @@ def main() -> None:
 
     except Exception as e:
         print(f"Error: {e}")
+
 
 if __name__ == "__main__":
     main()

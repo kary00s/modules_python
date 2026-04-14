@@ -40,7 +40,11 @@ def main():
     sorted_data = artifact_sorter(artifact)
     first = sorted_data[0]
     second = sorted_data[1]
-    print(first["name"], f"({first["power"]}", " comes before ", second["name"], f"({second["power"]})\n")
+    print(first["name"], 
+          f"({first["power"]}", 
+          " comes before ", 
+          second["name"], 
+          f"({second["power"]})\n")
     
 
     lst = ["fireball", "heal", "shield"]

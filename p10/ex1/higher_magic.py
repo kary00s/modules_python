@@ -1,8 +1,10 @@
 def spell(target: str, power: int) -> str:
     return f"targeted {target} and power used is {power}"
 
+
 def heal(target: str, power: int) -> str:
     return f"Heal restores {target} for {power} HP"
+
 
 def spell_combiner(spell1: callable, spell2: callable) -> callable:
     if not callable(spell1) or not callable(spell2):
@@ -13,13 +15,13 @@ def spell_combiner(spell1: callable, spell2: callable) -> callable:
         spell2(*args, **kwargs),
     )
 
+
 def spell_sequence(spells: list[callable]) -> callable:
     if not all(callable(spell) for spell in spells):
         raise Exception("call all the spells")
 
-    return lambda *args, **kwargs: [
-        spell(*args, **kwargs) for spell in spells
-    ]
+    return lambda *args, **kwargs: [spell(*args, **kwargs) for spell in spells]
+
 
 def power_amplifier(base_spell: callable, multiplier: int) -> callable:
     if not callable(base_spell):
@@ -33,14 +35,8 @@ def conditional_caster(condition: callable, spell: callable) -> callable:
         raise Exception("call both Condition and spell")
 
     return lambda *args, **kwargs: (
-        spell(*args, **kwargs)
-        if condition(*args, **kwargs)
-        else "Spell fizzled"
+        spell(*args, **kwargs) if condition(*args, **kwargs) else "Spell fizzled"
     )
-
-
-
-
 
 
 def main() -> None:
@@ -48,8 +44,8 @@ def main() -> None:
 
         print("Testing spell combiner...")
         combined_spell = spell_combiner(
-        lambda direction: f"Fireball hits {direction}",
-        lambda direction: f"Heals {direction}",
+            lambda direction: f"Fireball hits {direction}",
+            lambda direction: f"Heals {direction}",
         )
         spell_one, spell_two = combined_spell("dragon")
         print(f"Combined spell result:{spell_one}, {spell_two}\n")

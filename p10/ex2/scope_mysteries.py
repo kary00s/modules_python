@@ -1,5 +1,6 @@
 def mage_counter() -> callable:
     cnt = 0
+
     def counter_mages() -> int:
         nonlocal cnt
         cnt += 1
@@ -59,13 +60,11 @@ def main() -> None:
     print(f"counter_a Call 2:, {counter_a()}")
     print(f"counter_b Call 1:, {counter_b()}")
 
-
     base = 100
     accumulator_spells = spell_accumulator(base)
     print("\nTesting spell accumulator... ")
     print(f"base {base}, add 20, {accumulator_spells(20)}")
     print(f"base {base}, add 30, {accumulator_spells(30)}")
-
 
     names = ["Sword", "Shield"]
     enhancements = ["Flaming", "Frozen"]
@@ -75,10 +74,9 @@ def main() -> None:
         result = enchantment_factory(enhancement)
         print(result(name))
 
-
     vault = memory_vault()
     print("\nTesting memory vault... ")
-    
+
     vault["store"]("secret", spell_accumulator(42))
     vault["recall"]("secret")
     vault["recall"]("unknown")
