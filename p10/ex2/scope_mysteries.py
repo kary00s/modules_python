@@ -1,4 +1,7 @@
-def mage_counter() -> callable:
+from typing import Callable
+
+
+def mage_counter() -> Callable:
     cnt = 0
 
     def counter_mages() -> int:
@@ -9,7 +12,7 @@ def mage_counter() -> callable:
     return counter_mages
 
 
-def spell_accumulator(initial_power: int) -> callable:
+def spell_accumulator(initial_power: int) -> Callable:
     power = initial_power
 
     def accumulate(spell_power: int) -> int:
@@ -20,7 +23,7 @@ def spell_accumulator(initial_power: int) -> callable:
     return accumulate
 
 
-def enchantment_factory(enchantment_type: str) -> callable:
+def enchantment_factory(enchantment_type: str) -> Callable:
 
     def enchantment_creator(factory: str) -> str:
         return f"{enchantment_type} {factory}"
@@ -28,21 +31,20 @@ def enchantment_factory(enchantment_type: str) -> callable:
     return enchantment_creator
 
 
-def memory_vault() -> dict[str, callable]:
+def memory_vault() -> dict[str, Callable]:
     vault_dict = {}
 
-    def store(key: str, value: callable) -> None:
+    def store(key: str, value: Callable) -> None:
         if value is None:
             print("Memory not found")
             return
         vault_dict[key] = value
         print(f"Store '{key}' = {value(0)}")
 
-    def recall(key: str) -> callable:
+    def recall(key: str) -> Callable:
         value = vault_dict.get(key)
         if value is None:
-            print("Recall 'unknown': Memory not found")
-            return None
+            raise Exception("Recall 'unknown': Memory not found")
         print(f"Recall '{key}': {value(0)}")
         return value
 

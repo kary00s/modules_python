@@ -46,7 +46,8 @@ def retry_spell(max_attempts: int) -> Callable:
                 except Exception as e:
                     last_error = e
                     print(
-                        f"Spell failed, retrying... (attempt {attempt}/{max_attempts})"
+                        "Spell failed, retrying... "
+                        f"(attempt {attempt}/{max_attempts})"
                     )
 
             print(f"Spell casting failed after {max_attempts} attempts")

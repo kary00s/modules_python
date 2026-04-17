@@ -1,3 +1,7 @@
+from typing import Callable
+from builtins import callable
+
+
 def spell(target: str, power: int) -> str:
     return f"targeted {target} and power used is {power}"
 
@@ -6,7 +10,7 @@ def heal(target: str, power: int) -> str:
     return f"Heal restores {target} for {power} HP"
 
 
-def spell_combiner(spell1: callable, spell2: callable) -> callable:
+def spell_combiner(spell1: Callable, spell2: Callable) -> Callable:
     if not callable(spell1) or not callable(spell2):
         raise Exception("call both Spell1 and spell2")
 
@@ -16,26 +20,27 @@ def spell_combiner(spell1: callable, spell2: callable) -> callable:
     )
 
 
-def spell_sequence(spells: list[callable]) -> callable:
+def spell_sequence(spells: list[Callable]) -> Callable:
     if not all(callable(spell) for spell in spells):
         raise Exception("call all the spells")
 
     return lambda *args, **kwargs: [spell(*args, **kwargs) for spell in spells]
 
 
-def power_amplifier(base_spell: callable, multiplier: int) -> callable:
+def power_amplifier(base_spell: Callable, multiplier: int) -> Callable:
     if not callable(base_spell):
         raise Exception("call the Base spell function")
 
     return lambda *args, **kwargs: base_spell(*args, **kwargs) * multiplier
 
 
-def conditional_caster(condition: callable, spell: callable) -> callable:
+def conditional_caster(condition: Callable, spell: Callable) -> Callable:
     if not callable(condition) or not callable(spell):
         raise Exception("call both Condition and spell")
 
     return lambda *args, **kwargs: (
-        spell(*args, **kwargs) if condition(*args, **kwargs) else "Spell fizzled"
+        spell(*args, **kwargs) if condition(*args, **kwargs) else
+        "Spell fizzled"
     )
 
 

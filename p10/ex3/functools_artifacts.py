@@ -1,5 +1,5 @@
 from functools import lru_cache, reduce, partial, singledispatch
-from typing import Any
+from typing import Any, Callable
 
 
 def spell_reducer(spells: list[int], operation: str) -> int:
@@ -15,7 +15,7 @@ def spell_reducer(spells: list[int], operation: str) -> int:
         return 0
 
 
-def partial_enchanter(base_enchantment: callable) -> dict[str, callable]:
+def partial_enchanter(base_enchantment: Callable) -> dict[str, Callable]:
     ghost = partial(base_enchantment, power=100, element="ghost")
     speed = partial(base_enchantment, power=50, element="speed")
     fire = partial(base_enchantment, power=100, element="fire")
@@ -29,7 +29,8 @@ def partial_enchanter(base_enchantment: callable) -> dict[str, callable]:
 
 def base_enchantment(power: int, element: str, target: str) -> str:
     return (
-        f"Enchantment with power {power}" f" and element {element} applied to {target}"
+        f"Enchantment with power {power}"
+        f" and element {element} applied to {target}"
     )
 
 
@@ -41,22 +42,22 @@ def memoized_fibonacci(n: int) -> int:
 
 
 @singledispatch
-def spell_dispatcher(_: Any) -> callable:
+def spell_dispatcher(_: Any) -> Callable:
     raise Exception("Invalid type for spell_dispatcher")
 
 
 @spell_dispatcher.register
-def _(damage_spell: int) -> callable:
+def _(damage_spell: int) -> Callable:
     return lambda x: f"Damage sepll: {damage_spell + x} damage"
 
 
 @spell_dispatcher.register
-def _(enchantment: str) -> callable:
+def _(enchantment: str) -> Callable:
     return lambda _: f"Enchantment: {enchantment.lower()}"
 
 
 @spell_dispatcher.register
-def _(multi_cast: list) -> callable:
+def _(multi_cast: list) -> Callable:
     return lambda _: f"Multi-cast: {len(multi_cast)} spells"
 
 
